@@ -1,0 +1,5 @@
+username,password
+tomsmith,SuperSecretPassword!
+invalid,invalid
+tomsmith,wrongpassword
+invalid,SuperSecretPassword!
