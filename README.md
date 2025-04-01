@@ -29,7 +29,7 @@ login-app-automation/
 │   └── conftest.py            # Common fixtures and settings (for screenshots, HTML report configuration, etc.)
 ├── test_data.py               # Utility for CSV loading & expected result determination
 └── README.md                  # This documentation
-
+```
 
 ## Environment Setup
 
