@@ -2,6 +2,9 @@
 A basic login app and its automation test code
 This repository is a login test automation project targeting [The Internet - Login Page](https://the-internet.herokuapp.com/login) using **pytest** and **Playwright**.  
 It covers multiple authentication scenarios (both successful and unsuccessful) by utilizing **data-driven tests (DDT)** with test data stored in CSV files.
+Additionally, the tests are executed across multiple browsers—Chromium, Firefox, and WebKit—to ensure comprehensive cross-browser compatibility.
+
+
 
 ## Features
 

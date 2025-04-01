@@ -2,10 +2,10 @@ import pytest
 from playwright.sync_api import sync_playwright
 from test_data import load_csv_data, determine_expected_message
 
-@pytest.fixture(scope="session")
-def browser():
+@pytest.fixture(params=["chromium", "firefox", "webkit"], scope="session")
+def browser(request):
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=False)
+        browser = getattr(playwright, request.param).launch(headless=False)
         yield browser
         browser.close()
 
@@ -26,4 +26,6 @@ def test_login(page, screenshot_helper, username, password):
     page.click("button[type='submit']")
     screenshot_helper.capture(page, "afterLogin")
     flash_message = page.inner_text("div#flash")
+    user_agent = page.evaluate("() => navigator.userAgent")
+    print(user_agent)
     assert expected_message in flash_message
