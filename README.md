@@ -19,14 +19,17 @@ It covers multiple authentication scenarios (both successful and unsuccessful) b
   - The execution results are output as a self-contained HTML report using the `pytest-html` plugin.
 
 ## Directory Structure
+
+```plaintext
 login-app-automation/
 ├── testdata/
-│   └── login_data.csv    # Test data (CSV)
+│   └── login_data.csv         # Test data (CSV)
 ├── tests/
-│   ├── test_login.py     # Test code
-│   └── conftest.py       # Common fixtures and settings (for screenshots, HTML report configuration, etc.)
-├── test_data.py          # Utility for CSV loading & expected result determination
-└── README.md             # This documentation
+│   ├── test_login.py          # Test code
+│   └── conftest.py            # Common fixtures and settings (for screenshots, HTML report configuration, etc.)
+├── test_data.py               # Utility for CSV loading & expected result determination
+└── README.md                  # This documentation
+
 
 ## Environment Setup
 
