@@ -4,7 +4,6 @@ from playwright.async_api import async_playwright
 import datetime
 from pytest_html import extras
 
-
 # get a current time 
 now = datetime.datetime.now()
 formatted_time = now.strftime("%Y%m%d_%H%M") #format for file name
@@ -16,7 +15,26 @@ def pytest_configure(config):
 
 # configuration for title of report
 def pytest_html_report_title(report):
-    report.title = f"My test report - {formatted_title_time}"
+    report.title = f"Login test report - {formatted_title_time}"
+
+# link the video in the report
+def pytest_html_results_table_row(report, cells):
+    video_url = None
+    for name, value in getattr(report, "user_properties", []):
+        if name == "video_path":
+            video_url = value
+            break
+
+    if video_url and len(cells) >= 4:
+        cells[3] = HTMLExtra(f'<a href="{video_url}" target="_blank">Video</a>')
+
+# __module__HTML wrapper
+class HTMLExtra:
+    __module__ = "pytest_html.extra"
+    def __init__(self, content):
+        self.content = content
+    def __str__(self):
+        return self.content
 
 class ScreenshotHelper:
     def __init__(self, test_name, screenshot_dir="screenshots"):
@@ -43,6 +61,7 @@ def screenshot_helper(request):
 def pytest_runtest_makereport(item, call):
     outcome = yield
     rep = outcome.get_result()
+
     if rep.when == "call":
         helper = getattr(item, "screenshot_helper", None)
         if helper and helper.screenshots:
@@ -51,3 +70,12 @@ def pytest_runtest_makereport(item, call):
                 extra.append(extras.image(screenshot, mime_type="image/png"))
 
             rep.extra = extra
+
+        page = item.funcargs.get("page", None)
+        if page and hasattr(page, "video"):
+            try:
+                video_path = page.video.path().replace("\\", "/")
+                if hasattr(rep, "user_properties"):
+                    rep.user_properties.append(("video_path", video_path))
+            except Exception:
+                pass
