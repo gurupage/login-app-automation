@@ -18,8 +18,11 @@ Additionally, the tests are executed across multiple browsers—Chromium, Firefo
 - **Screenshot Capture**
   - During test execution, screenshots are taken at various steps (after form fill-out, after login) and embedded into the HTML report using the `screenshot_helper` fixture.
 
+- **Video Capture**
+  - During test execution, videos are taken and embedded into the HTML report.
+
 - **HTML Report Generation**
-  - The execution results are output as a self-contained HTML report using the `pytest-html` plugin.
+  - The execution results are output as a HTML report using the `pytest-html` plugin.
 
 ## Directory Structure
 
@@ -48,8 +51,9 @@ login-app-automation/
 
     pip install pytest playwright pytest-html
     playwright install
+    pip install py
 
 4. **Running the Tests**
-    Execute the tests using the following command to generate a self-contained HTML report:
+    Execute the tests using the following command to generate a HTML report:
 
-    pytest --html=report.html --self-contained-html
+    pytest --html=report.html
