@@ -40,20 +40,25 @@ login-app-automation/
 ## Environment Setup
 
 1. **Install Python**  
+
    Ensure that Python 3.12 or later is installed.
 
 2. **Create and Activate a Virtual Environment**
 
-   python -m venv venv
+   python -m venv venv  
+
    .\venv\Scripts\activate
 
 3. **Install the Required Packages**
 
-    pip install pytest playwright pytest-html
-    playwright install
+    pip install pytest playwright pytest-html  
+   
+    playwright install  
+   
     pip install py
 
-4. **Running the Tests**
+4. **Running the Tests**  
+
     Execute the tests using the following command to generate a HTML report:
 
     pytest --html=report.html
